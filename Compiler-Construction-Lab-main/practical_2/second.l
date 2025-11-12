@@ -14,6 +14,7 @@ int|float|char|if|else|for {key++;}
 [a-zA-Z_][a-zA-Z0-9_]* {id++;}
 "//"[a-zA-Z0-9_\t ]* {comment++;}
 "/*"[a-zA-Z0-9\t\n_ ]*"*/" {comment++;}
+[A-Za-z]+ {word++;}
 [ \t] {space++;}
 .|\n { }
 %%
