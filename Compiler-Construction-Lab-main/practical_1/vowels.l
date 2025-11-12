@@ -4,7 +4,7 @@ int vowel = 0;
 %}
 
 %%
-[A+E+I+O+Ua+e+i+o+u]+ {printf("a vowel");} {vowel++}
+[A+E+I+O+Ua+e+i+o+u]+ {vowel++;}
 .|\n { }
 %%
 
