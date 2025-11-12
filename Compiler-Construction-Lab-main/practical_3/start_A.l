@@ -1,19 +1,18 @@
 %{
 #include <stdio.h>
-int counter = 0;
+int count = 0;
 %}
 
 %%
-[Aa][a-zA-Z0-9]*   { counter++; }
-[a-zA-Z0-9]+ ;
-[\t\n]+ ;
-. ;
+[Aa][a-zA-Z]*      { count++; }
+[a-zA-Z]+          ;
+[ \t\n]+           ;
 %%
 
 int main() {
-    printf("Your input: ");
+    printf("Enter text:\n");
     yylex();
-    printf("Number of words starting with A: %d\n", counter);
+    printf("Number of words starting with A or a: %d\n", count);
     return 0;
 }
 
