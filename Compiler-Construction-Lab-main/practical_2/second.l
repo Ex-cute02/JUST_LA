@@ -15,7 +15,6 @@ int nline = 0;
 [a-zA-Z_][a-zA-Z0-9_]*      { id++; }
 "//"[^\n]*                  { comment++; }
 "/*"([^*]|\*+[^*/])*"*/"    { comment++; }
-[A-Za-z]+                   { word++; }
 [ \t]                       { space++; }
 .                           { }
 %%
@@ -28,7 +27,6 @@ int main() {
     printf("Identifiers : %d\n", id);
     printf("Keywords    : %d\n", key);
     printf("Comments    : %d\n", comment);
-    printf("Words       : %d\n", word);
     printf("Spaces      : %d\n", space);
     printf("Newlines    : %d\n", nline);
 
