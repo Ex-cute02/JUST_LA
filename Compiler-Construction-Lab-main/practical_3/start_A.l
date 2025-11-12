@@ -4,7 +4,7 @@ int counter = 0;
 %}
 
 %%
-[A,a][a-zA-Z]*   { counter++; }
+[Aa][a-zA-Z]*   { counter++; }
 %%
 
 int main() {
