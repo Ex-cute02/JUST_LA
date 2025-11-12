@@ -1,9 +1,6 @@
 %{
-//anushri adapawar
-// september 16, 2025
 #include<stdio.h>
 #include<stdlib.h>
-
 void yyerror(char *s);
 int yylex(void);
 %}
@@ -24,14 +21,14 @@ expr:
 	;
 %%
 
-void yyerror(char *s)
-{
-
-}
-
 int main()
 {
+	printf("Enter postfix expression:\n");
 	yyparse();
 	return 0;
 }
 
+void yyerror(char *s)
+{
+
+}

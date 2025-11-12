@@ -15,27 +15,26 @@ int yylex(void);
 
 %%
 program:
-    program expr '\n'   { printf("Result: %d\n", $2); }
-  | 
-  ;
+      program expr '\n'   { printf("Result: %d\n", $2); }
+    | /* empty */
+    ;
 
 expr:
-    NUMBER              { $$ = $1; }
-  | expr '+' expr       { $$ = $1 + $3; }
-  | expr '-' expr       { $$ = $1 - $3; }
-  | expr '*' expr       { $$ = $1 * $3; }
-  | expr '/' expr       { 
-        if ($3 == 0) {
-          yyerror("division by zero");
-          $$ = 0;
-        } else {
-          $$ = $1 / $3;
-        }
-    }
-  | '(' expr ')'        { $$ = $2; }
-  | expr '^' expr	{ $$ = pow($1, $3); }
-  ;
-
+      NUMBER              { $$ = $1; }
+    | expr '+' expr       { $$ = $1 + $3; }
+    | expr '-' expr       { $$ = $1 - $3; }
+    | expr '*' expr       { $$ = $1 * $3; }
+    | expr '/' expr       { 
+                              if ($3 == 0) {
+                                  yyerror("Division by zero");
+                                  $$ = 0;
+                              } else {
+                                  $$ = $1 / $3;
+                              }
+                           }
+    | '(' expr ')'        { $$ = $2; }
+    | expr '^' expr       { $$ = pow($1, $3); }
+    ;
 %%
 
 void yyerror(const char *s) {
@@ -43,8 +42,7 @@ void yyerror(const char *s) {
 }
 
 int main() {
-    printf("Enter expressions:\n");
+    printf("Enter expressions (Ctrl+D to exit):\n");
     yyparse();
     return 0;
 }
-

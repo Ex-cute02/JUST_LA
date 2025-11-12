@@ -1,5 +1,4 @@
 %{
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -19,7 +18,6 @@ int yylex(void);
 %start for_loop
 
 %%
-
 for_loop:
     FOR LPAREN assignment SEMI condition SEMI operation RPAREN block {
         printf("Parsed a valid FOR loop.\n");
@@ -36,8 +34,8 @@ condition:
 ;
 
 operation:
-    ID PLUSPLUS
-	| ID DEC
+      ID PLUSPLUS
+    | ID DEC
 ;
 
 block:
@@ -45,14 +43,13 @@ block:
 ;
 
 statements:
-
+      /* empty */
     | statements statement
 ;
 
 statement:
     assignment SEMI
 ;
-
 %%
 
 void yyerror(const char *s) {
@@ -64,4 +61,3 @@ int main() {
     yyparse();
     return 0;
 }
-
