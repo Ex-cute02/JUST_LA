@@ -1,29 +1,23 @@
 %{
-#include<stdio.h>
-int count = 0;
-int counter = 0;
-int com_count(char *text){
-	count++;
-	return count;
-}
+#include <stdio.h>
 
+int count = 0;
+int total = 0;
 %}
 
 %%
-^.*com$ {char text = com_count(yytext);}
-.*|\n {counter++;}
+^.*com$   { count++; total++; }
+.*\n      { total++; }
+.|\n      { ; }
 %%
 
-int main()
-{
-	printf("Your input: \n");
-	yylex();
-	printf("Number of lines ending with com : %d\n",count);
-	printf("Not ending with com : %d\n", counter);
-	return 0;
+int main() {
+    printf("Enter text (Ctrl+D to end):\n");
+    yylex();
+    printf("\n'com' included in %d out of %d lines\n", count, total);
+    return 0;
 }
 
-int yywrap()
-{
-	return 1;
+int yywrap() {
+    return 1;
 }
