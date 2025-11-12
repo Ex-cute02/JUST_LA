@@ -4,7 +4,10 @@ int counter = 0;
 %}
 
 %%
-[Aa][a-zA-Z]*   { counter++; }
+[Aa][a-zA-Z0-9]*   { counter++; }
+[a-zA-Z0-9]+ ;
+[\t\n]+ ;
+. ;
 %%
 
 int main() {
