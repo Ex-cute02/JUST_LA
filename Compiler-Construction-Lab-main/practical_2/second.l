@@ -1,36 +1,40 @@
 %{
-#include<stdio.h>
+#include <stdio.h>
+
 int id = 0;
 int comment = 0;
 int key = 0;
 int word = 0;
-int space = 0, nline = 0;
-
+int space = 0;
+int nline = 0;
 %}
 
 %%
-\n {nline++;}
-int|float|char|if|else|for {key++;}
-[a-zA-Z_][a-zA-Z0-9_]* {id++;}
-"//"[a-zA-Z0-9_\t ]* {comment++;}
-"/*"[a-zA-Z0-9\t\n_ ]*"*/" {comment++;}
-[A-Za-z]+ {word++;}
-[ \t] {space++;}
-.|\n { }
+\n                          { nline++; }
+(int|float|char|if|else|for) { key++; }
+[a-zA-Z_][a-zA-Z0-9_]*      { id++; }
+"//"[^\n]*                  { comment++; }
+"/*"([^*]|\*+[^*/])*"*/"    { comment++; }
+[A-Za-z]+                   { word++; }
+[ \t]                       { space++; }
+.                           { }
 %%
-int main()
-{
-printf("Enter your code: \n");
-yylex();
-printf("Number of Identifiers: %d\n", id);
-printf("Number of spaces: %d\n", space);
-printf("Number of keywords: %d\n", key);
-printf("Number of comments: %d\n", comment);
-printf("Number of newline: %d\n", nline);
-printf("Number of words: %d\n", word);
-return 0;
+
+int main() {
+    printf("Enter your code (Ctrl+D to end input):\n");
+    yylex();
+
+    printf("\n--- Code Statistics ---\n");
+    printf("Identifiers : %d\n", id);
+    printf("Keywords    : %d\n", key);
+    printf("Comments    : %d\n", comment);
+    printf("Words       : %d\n", word);
+    printf("Spaces      : %d\n", space);
+    printf("Newlines    : %d\n", nline);
+
+    return 0;
 }
-int yywrap()
-{
-return 1;
+
+int yywrap(void) {
+    return 1;
 }
